@@ -1,102 +1,105 @@
-Opis projektu
-Celem projektu było stworzenie aplikacji konsolowej w języku C++, umożliwiającej
-szyfrowanie i deszyfrowanie tekstu przy użyciu wybranych algorytmów kryptograficznych.
-Aplikacja pozwala użytkownikowi na interaktywne wprowadzanie danych, wybór metody
-działania, odczyt tekstu z pliku i zapis wyników pracy do pliku tekstowego. Główny nacisk
-położono na modułowość kodu oraz zabezpieczenie przed błędnymi danymi wejściowymi.
+# 🔐 Szyfrator
 
-2.
-Funkcjonalności
-Program oferuje następujące funkcjonalności:
+> *Konsolowa aplikacja w C++ do szyfrowania i deszyfrowania tekstu trzema klasycznymi algorytmami.
+> Juliusz Cezar byłby dumny. NSA raczej nie.*
 
-• Menu główne: Prosta nawigacja tekstowa pozwalająca na wybór między
-szyfrowaniem, deszyfrowaniem, instrukcją obsługi a wyjściem z programu.
-• Szyfrowanie tekstu: Możliwość zaszyfrowania wiadomości przy użyciu trzech
-algorytmów:
+![C++](https://img.shields.io/badge/language-C%2B%2B-00599C?logo=cplusplus&logoColor=white)
+![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)
+![IDE](https://img.shields.io/badge/Visual%20Studio-Community-5C2D91?logo=visualstudio&logoColor=white)
 
-o Szyfr Cezara (przesunięcie o stałą wartość).
-o Szyfr Vigenère’a (szyfrowanie wieloalfabetowe przy użyciu hasła).
-o Szyfr XOR (z dostosowaniem wyników do alfabetu A-Z).
-• Deszyfracja tekstu: Proces odwrotny dla wyżej wymienionych metod.
-• Walidacja danych: Mechanizm sprawdzający czy wprowadzony tekst zawiera
-niedozwolone znaki (mieści się w zakresie 32-126 Tabeli ASCII).
-• Odczyt z pliku: możliwość odczytania tekstu z pliku w celu szyfrowania lub
-deszyfrowania.
-• Zapis do pliku: Możliwość zapisania odszyfrowanej i zaszyfrowanej wiadomości do
-pliku tekstowego o nazwie podanej przez użytkownika.
-• Instrukcja obsługi: Wbudowany moduł wyświetlający zasady korzystania z programu.
-• Obsługa błędów: Zabezpieczenie przed wprowadzaniem błędnych typów danych
-(np. liter zamiast liczb).
+---
 
-3.
-Przebieg realizacji
-Projekt został zrealizowany w języku C++ z wykorzystaniem paradygmatu programowania
-proceduralnego. Kod został podzielony na pliki nagłówkowe (.h) w celu zwiększenia
-czytelności i łatwości zarządzania projektem. Program został napisany w Visual Studio
-Community 2022.
+## 📖 Opis projektu
 
-3.1.
-Struktura plików
-• main.cpp: Główny plik programu. Zawiera pętlę główną aplikacji oraz obsługę menu
-wyboru. Odpowiada za wywoływanie odpowiednich funkcji z innych modułów.
-• instrukcjaobslugi.h: Zawiera funkcję wyświetlającą pomoc oraz funkcję ustawKolor
-(wykorzystującą bibliotekę windows.h do zmiany kolorów w konsoli).
-• MetodyPomocniczne.cpp/ .h: Zawiera funkcje pomocnicze, które znacząco
-usprawniają program. Znajduje się tam sprawdzenie tekstu i klucz pobranego przez
-użytkownika, “Menu szyfrowania i deszyfrowania”, zapis do pliku i odczyt z pliku.
-• Szyfrator.cpp/.h: Zawiera zaimplementowane algorytmy szyfrujące/deszyfrujące,
-obsługujące znaki tabeli ASCII 32-126.
+Celem projektu było stworzenie aplikacji konsolowej w języku **C++**, umożliwiającej
+**szyfrowanie i deszyfrowanie tekstu** przy użyciu wybranych algorytmów kryptograficznych.
 
-3.2.
-Opis algorytmów
-W projekcie zaimplementowano następujące algorytmy:
-Start_ASCII = 32;
-Zakres = 95;
+Aplikacja pozwala na interaktywne wprowadzanie danych, wybór metody działania, odczyt tekstu
+z pliku oraz zapis wyników do pliku tekstowego. Główny nacisk położono na **modułowość kodu**
+oraz **zabezpieczenie przed błędnymi danymi wejściowymi**.
 
-A. Szyfr Cezara
-Algorytm przesuwający każdy znak o stałą wartość klucz. W implementacji zastosowano
-operację modulo, aby wynik zawsze mieścił się w zakresie liter A-Z.
-Pseudokod:
-Dla każdego znaku w tekście: NowyZnak = (Znak – Start_ASCII+ Klucz) % Zakres + Start_ASCII.
+## ✨ Funkcjonalności
 
-B. Szyfr Vigenère’a
-Szyfr polialfabetyczny, gdzie przesunięcie zależy od litery słowa kluczowego.
-Opis działania: Dla znaku tekstu na pozycji i oraz klucza o długości L, przesunięcie
-wyznaczane jest przez znak klucza na pozycji i % L. Wzór matematyczny zastosowany w
-kodzie:
+| | Funkcja | Opis |
+|---|---|---|
+| 🧭 | **Menu główne** | Prosta nawigacja klawiszami `1`–`4`, bez potrzeby wciskania Enter |
+| 🔒 | **Szyfrowanie** | Trzy algorytmy do wyboru: Cezar, XOR, Vigenère |
+| 🔓 | **Deszyfrowanie** | Proces odwrotny dla każdej z metod |
+| 📂 | **Odczyt z pliku** | Tekst można wczytać z pliku `.txt` zamiast wpisywać ręcznie |
+| 💾 | **Zapis do pliku** | Wynik można dopisać do pliku o dowolnej nazwie |
+| 🛡️ | **Walidacja danych** | Akceptowane są tylko znaki ASCII z zakresu **32–126** |
+| ⚠️ | **Obsługa błędów** | Ochrona przed błędnym typem danych (np. litery zamiast liczby) z opcją ponowienia |
+| 📘 | **Instrukcja obsługi** | Wbudowana pomoc dostępna z poziomu menu |
+| 🎨 | **Kolorowa konsola** | Bo czarno-biały terminal jest smutny |
 
-Ci = (Pi +Ki) mod Zakres,
+## 🧮 Algorytmy
 
-Gdzie C to szyfrogram, P to tekst jawny, a K to klucz.
+Wszystkie algorytmy działają na **95 drukowalnych znakach ASCII** (od spacji `32` do `~` `126`),
+więc szyfrują nie tylko litery, ale też cyfry, spacje i symbole.
 
-C. Szyfr XOR (wariant szesnastkowy)
-Standardowy XOR operuje na bitach. W tym projekcie, aby zachować czytelność,
-zastosowano wariant oparty na systemie szesnastkowym. Tekst jest konwertowany na
-system szesnastkowy, następnie jest wykonywana operacja XOR.
-Implementacja:
-Dla każdego i: Wynik += Hex( Tekst[i] ^ Klucz[i mod |Klucz|] )
+### 🏛️ Szyfr Cezara
+Każdy znak przesuwany jest o stałą wartość (klucz liczbowy). Obsługuje też klucze ujemne.
 
-3.3.
-Wykorzystane biblioteki
-• <iostream>: Obsługa strumieni wejścia/wyjścia.
-• <conio.h>: Obsługa strumieni wejścia/wyjścia innych niż w przypadku <iostream>.
-• <string>: Operacje na łańcuchach tekstowych.
-• <fstream>: Obsługa zapisu/odczytu plików tekstowych.
-• <windows.h>: Wykorzystana do funkcji SetConsoleTextAttribute (kolorowanie
-składni) oraz czyszczenia ekranu.
-• <sstream>: Biblioteka umożliwiająca konwersję liczb na ciągi znaków.
-• <iomanip>: Biblioteka umożliwiająca formatowanie tekstu/wyjścia.
+$$C = (P - 32 + K) \bmod 95 + 32$$
 
-4. Podsumowanie i wnioski
-W ramach projektu udało się zrealizować w pełni funkcjonalny szyfrator obsługujący trzy
-różne metody kryptograficzne. Największym wyzwaniem była optymalizacja kodu jak i
-opracowanie odpowiedniego algorytmu do szyfrowania/deszyfrowania XOR. Funkcja
-sprawdzIPrzygotujTekst skutecznie eliminuje znaki spoza ustalonego zakresu zapobiega
-błędom w obliczeniach modulo, co miało duże znaczenie szczególnie w deszyfrowaniu
-tekstu.
-Dzięki zastosowaniu podziału na pliki nagłówkowe i źródłowe kod jest czytelny i łatwy w
-modyfikacji.
-Możliwe kierunki rozwoju:
-• Implementacja graficznego interfejsu użytkownika (GUI).
-• Zaimplementowanie nowych algorytmów szyfrujących.
+### ⚡ Szyfr XOR
+Operacja bitowa XOR między znakiem tekstu a znakiem klucza. Klucz jest powtarzany,
+jeśli jest krótszy od tekstu.
 
+$$C = \big((P - 32) \oplus (K - 32)\big) \bmod 95 + 32$$
+
+### 🔑 Szyfr Vigenère'a
+Polialfabetyczny szyfr podstawieniowy, czyli Cezar z innym przesunięciem dla każdego znaku,
+wyznaczanym przez kolejne litery hasła.
+
+$$C = (P + K) \bmod 95 \qquad P = (C - K + 95) \bmod 95$$
+
+## 🖥️ Jak to wygląda
+
+```
+|---------------------------------------|
+|           PROGRAM SZYFRATOR           |
+|---------------------------------------|
+|       [1] Szyfrowanie tekstu          |
+|       [2] Deszyfracja tekstu          |
+|       [3] Instrukcja obslugi          |
+|       [4] Wyjscie z programu          |
+|---------------------------------------|
+|         Wybierz opcje (1-4):          |
+|---------------------------------------|
+```
+
+## 🚀 Uruchomienie
+
+**Wymagania:** Windows + Visual Studio Community z workloadem *Desktop development with C++*.
+
+1. Sklonuj repozytorium lub pobierz ZIP
+2. Otwórz plik `Projekt Szyfratpr2.slnx`
+3. Naciśnij **Ctrl+F5**
+4. Szyfruj sekrety 🤫
+
+## 📁 Struktura plików
+
+```
+📦 Projekt-Szyfrator
+ ┣ 📜 main.cpp               → pętla główna i menu programu
+ ┣ 📜 instrukcjaObslugi.h    → instrukcja obsługi + kolory konsoli (windows.h)
+ ┣ 📜 szyfrator.h / .cpp     → implementacja algorytmów szyfrujących i deszyfrujących
+ ┣ 📜 metodyPomocnicze.h/.cpp→ walidacja, odczyt/zapis plików, obsługa menu szyfrowania
+ ┗ 📄 plik.txt, plik2.txt    → przykładowe pliki testowe
+```
+
+Projekt zrealizowano w paradygmacie **programowania proceduralnego**. Kod podzielono na moduły
+(pliki `.h` / `.cpp`) dla lepszej czytelności i łatwiejszego zarządzania.
+
+## ⚠️ Disclaimer
+
+> [!CAUTION]
+> To projekt edukacyjny. Szyfry Cezara, XOR z krótkim kluczem i Vigenère'a da się złamać
+> w kilka minut (a Cezara w kilka sekund). **Nie szyfruj nimi haseł do banku.** 🙃
+
+---
+
+<p align="center">
+  Autor: <b>Mateusz Miozga</b> · napisane w Visual Studio Community
+</p>
